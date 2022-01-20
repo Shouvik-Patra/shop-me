@@ -37,6 +37,7 @@ import {useState} from 'react';
 import Splash from './src/views/screens/Splash';
 import {useEffect} from 'react';
 import Login from './src/views/screens/Login';
+import Registration from './src/views/screens/Registration';
 const Stack = createStackNavigator();
 LogBox.ignoreLogs([
   "[react-native-gesture-handler] Seems like you're using an old API with gesture components, check out new Gestures system!",
@@ -60,6 +61,7 @@ const App = () => {
       <Stack.Navigator screenOptions={{headerShown: false}}>
       
       <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="Registration" component={Registration} />
         <Stack.Screen name="BoardScreen" component={OnBoardScreen} />
         <Stack.Screen name="Home" component={BottomNavigator} />
         <Stack.Screen name="DetailsScreen" component={DetailsScreen} />

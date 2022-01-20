@@ -74,7 +74,7 @@ const HomeScreen = ({navigation}) => {
         activeOpacity={0.9}
         onPress={() => navigation.navigate('DetailsScreen', food)}>
         <View style={style.card}>
-          <View style={{alignItems: 'center', top: -40}}>
+          <View style={{alignItems: 'center', top: 0}}>
             <Image source={food.image} style={{height: 120, width: 120}} />
           </View>
           <View style={{marginHorizontal: 20}}>
@@ -108,17 +108,26 @@ const HomeScreen = ({navigation}) => {
           <View style={{flexDirection: 'row'}}>
             <Text style={{fontSize: 28}}>Hello,</Text>
             <Text style={{fontSize: 28, fontWeight: 'bold', marginLeft: 10}}>
-              Ariz
+              Jay
             </Text>
           </View>
           <Text style={{marginTop: 5, fontSize: 22, color: COLORS.grey}}>
             What do you want today
           </Text>
         </View>
-        <Image
-          source={require('../../assets/person.png')}
-          style={{height: 50, width: 50, borderRadius: 25}}
-        />
+        <View
+          style={{
+            backgroundColor: COLORS.primary,
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: 50,
+            width: 50,
+            borderRadius: 50,
+          }}>
+          <Text style={{fontSize: 30, fontWeight: 'bold', color: COLORS.white}}>
+            JS
+          </Text>
+        </View>
       </View>
       {/* <View
         style={{

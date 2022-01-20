@@ -13,10 +13,10 @@ import COLORS from '../../consts/colors';
 import {PrimaryButton} from '../components/Button';
 const {height, width} = Dimensions.get('window');
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-const Login = props => {
+const Registration = props => {
   return (
     <SafeAreaView style={{flex: 1}}>
-        <KeyboardAwareScrollView>
+     <KeyboardAwareScrollView>
       <View
         style={{
           height: height,
@@ -43,18 +43,17 @@ const Login = props => {
             source={require('../../assets/logo.png')}></Image>
         </View>
         <View style={{marginHorizontal: 15, width: width - 30}}>
+          <TextInputV placeholder={'First Name'}  />
+          <TextInputV placeholder={'Last Name'} />
+          <TextInputV placeholder={'Mobile'} />
           <TextInputV placeholder={'Email'} />
           <TextInputV placeholder={'Password'} showPass={true} />
           <View style={{marginTop: 20}}>
             <PrimaryButton
-              title="Login"
-              onPress={() => props.navigation.navigate('Registration')}
+              title="Registration"
+              onPress={() => props.navigation.navigate('BoardScreen')}
             />
           </View>
-          <Text
-            style={{alignSelf: 'center', color: COLORS.primary, marginTop: 10}}>
-            Forgot Password
-          </Text>
         </View>
       </View>
       </KeyboardAwareScrollView>
@@ -71,7 +70,7 @@ const TextInputV = ({placeholder = '', showPass = false}) => {
         borderWidth: 1,
         borderColor: COLORS.primary,
         borderRadius: 10,
-        marginTop: 20,
+        marginTop: 10,
       }}>
       <TextInput placeholder={placeholder}></TextInput>
       {showPass && (
@@ -91,4 +90,4 @@ const TextInputV = ({placeholder = '', showPass = false}) => {
     </View>
   );
 };
-export default Login;
+export default Registration;
