@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Dimensions,
   Image,
+  ImageBackground,
   SafeAreaView,
   StyleSheet,
   Text,
@@ -18,6 +19,8 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import COLORS from '../../consts/colors';
 import categories from '../../consts/categories';
 import foods from '../../consts/foods';
+import {Rtext} from '../../CommonComponents/common/Rtext';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
 const {width} = Dimensions.get('screen');
 const cardWidth = width / 2 - 20;
 
@@ -104,41 +107,59 @@ const HomeScreen = ({navigation}) => {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: COLORS.white}}>
       <View style={style.header}>
-        <View>
-          <View style={{flexDirection: 'row'}}>
-            <Text style={{fontSize: 28}}>Hello,</Text>
-            <Text style={{fontSize: 28, fontWeight: 'bold', marginLeft: 10}}>
-              Jay
-            </Text>
-          </View>
-          <Text style={{marginTop: 5, fontSize: 22, color: COLORS.grey}}>
-            What do you want today
+        <Image
+          source={require('../../assets/apps.png')}
+          style={{
+            // backgroundColor: COLORS.primary,
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: 35,
+            width: 35,
+            borderRadius: 50,
+          }}></Image>
+        <View
+          style={{
+            backgroundColor: COLORS.white,
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: 40,
+            padding: 10,
+            borderRadius: 50,
+            flexDirection: 'row',
+          }}>
+          <Image source={require('../../assets/placeholder.png')}></Image>
+          <Text style={{fontSize: 12, fontWeight: 'bold', color: COLORS.dark}}>
+            32 Ramkrishna Road,Kolkata
           </Text>
+          <Image
+            style={{tintColor: COLORS.primary}}
+            source={require('../../assets/down-arrow.png')}></Image>
         </View>
         <View
           style={{
             backgroundColor: COLORS.primary,
             alignItems: 'center',
             justifyContent: 'center',
-            height: 50,
-            width: 50,
+            height: 35,
+            width: 35,
             borderRadius: 50,
+            padding:5
           }}>
-          <Text style={{fontSize: 30, fontWeight: 'bold', color: COLORS.white}}>
+          <Text style={{fontSize: 20, fontWeight: 'bold', color: COLORS.white}}>
             JS
           </Text>
         </View>
       </View>
       {/* <View
         style={{
-          marginTop: 40,
+          marginTop: 10,
           flexDirection: 'row',
-          paddingHorizontal: 20,
+          paddingHorizontal: 10,
         }}>
         <View style={style.inputContainer}>
-          <Icon name="search" size={28} />
+          <Icon name="search" size={25} />
           <TextInput
-            style={{flex: 1, fontSize: 18}}
+            style={{flex: 1, fontSize: 12}}
             placeholder="Search for food"
           />
         </View>
@@ -146,6 +167,16 @@ const HomeScreen = ({navigation}) => {
           <Icon name="tune" size={28} color={COLORS.white} />
         </View>
       </View> */}
+      <ImageBackground
+        source={require('../../assets/banner1.jpg')}
+        imageStyle={{ borderRadius: 15}}
+        style={{
+          width: '100%',
+          height: 110,
+          marginTop:10,
+          paddingHorizontal:15,
+          marginLeft:15,
+        }}></ImageBackground>
       <View>
         <ListCategories />
       </View>
@@ -183,6 +214,7 @@ const style = StyleSheet.create({
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
+    
   },
   categoriesListContainer: {
     paddingVertical: 30,
@@ -197,6 +229,7 @@ const style = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 5,
     flexDirection: 'row',
+    elevation: 15,
   },
   categoryBtnImgCon: {
     height: 35,
@@ -205,6 +238,7 @@ const style = StyleSheet.create({
     borderRadius: 30,
     justifyContent: 'center',
     alignItems: 'center',
+    
   },
   card: {
     height: 220,
