@@ -46,14 +46,14 @@ LogBox.ignoreLogs([
 const App = () => {
   const [splash, setSplash] = useState(true);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setSplash(false);
-    }, 3000);
-  }, []);
-  if (splash) {
-    return <Splash />;
-  }
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setSplash(false);
+  //   }, 3000);
+  // }, []);
+  // if (splash) {
+  //   return <Splash />;
+  // }
 
   return (
     <NavigationContainer>
