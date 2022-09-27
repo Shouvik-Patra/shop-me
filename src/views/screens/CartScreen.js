@@ -24,10 +24,10 @@ const CartScreen = ({navigation}) => {
           </Text>
           <Text style={{fontSize: 17, fontWeight: 'bold'}}>${item.price}</Text>
         </View>
-        <View style={{marginRight: 20, alignItems: 'center'}}>
-          <Text style={{fontWeight: 'bold', fontSize: 18}}>3</Text>
+        <View style={{marginRight:15, }}>
           <View style={style.actionBtn}>
             <Icon name="remove" size={25} color={COLORS.white} />
+            <Text style={{fontWeight: 'bold', fontSize: 18,}}>3</Text>
             <Icon name="add" size={25} color={COLORS.white} />
           </View>
         </View>
@@ -89,12 +89,14 @@ const style = StyleSheet.create({
   actionBtn: {
     width: 80,
     height: 30,
+    elevation: 15,
     backgroundColor: COLORS.primary,
     borderRadius: 30,
     paddingHorizontal: 5,
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'space-evenly',
     alignContent: 'center',
+    
   },
 });
 
