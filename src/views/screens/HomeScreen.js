@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef, useState} from 'react';
 import {
   Dimensions,
   Image,
@@ -25,8 +25,11 @@ const {width} = Dimensions.get('screen');
 const cardWidth = width / 2 - 20;
 
 const HomeScreen = ({navigation}) => {
+  const [scollVal, setScollVal] = useState(0);
+  const [showSearch, setShowSearch] = useState(true);
   const [selectedCategoryIndex, setSelectedCategoryIndex] = React.useState(0);
-
+  const ref = useRef();
+  const [scrolled, setScrolled] = useState(true);
   const ListCategories = () => {
     return (
       <ScrollView
@@ -143,44 +146,67 @@ const HomeScreen = ({navigation}) => {
             height: 35,
             width: 35,
             borderRadius: 50,
-            padding:5
+            padding: 5,
           }}>
           <Text style={{fontSize: 20, fontWeight: 'bold', color: COLORS.white}}>
             JS
           </Text>
         </View>
       </View>
-      {/* <View
-        style={{
-          marginTop: 10,
-          flexDirection: 'row',
-          paddingHorizontal: 10,
-        }}>
-        <View style={style.inputContainer}>
-          <Icon name="search" size={25} />
-          <TextInput
-            style={{flex: 1, fontSize: 12}}
-            placeholder="Search for food"
-          />
+      {showSearch && (
+        <View
+          style={{
+            marginTop: 10,
+            flexDirection: 'row',
+            paddingHorizontal: 10,
+          }}>
+          <View style={style.inputContainer}>
+            <Icon name="search" size={25} />
+            <TextInput
+              style={{flex: 1, fontSize: 12}}
+              placeholder="Search for food"
+            />
+          </View>
+          <View style={style.sortBtn}>
+            <Icon name="tune" size={28} color={COLORS.white} />
+          </View>
         </View>
-        <View style={style.sortBtn}>
-          <Icon name="tune" size={28} color={COLORS.white} />
-        </View>
-      </View> */}
-      <ImageBackground
-        source={require('../../assets/banner1.jpg')}
-        imageStyle={{ borderRadius: 15}}
-        style={{
-          width: '100%',
-          height: 110,
-          marginTop:10,
-          paddingHorizontal:15,
-          marginLeft:15,
-        }}></ImageBackground>
-      <View>
-        <ListCategories />
-      </View>
+      )}
+
       <FlatList
+        ref={ref}
+        onScroll={e => {
+          console.log(
+            'event.nativeEvent.contentOffset.y',
+            e.nativeEvent.contentOffset.y,
+          );
+
+          setScollVal(e.nativeEvent.contentOffset.y);
+
+          if (e.nativeEvent.contentOffset.y > scollVal) {
+            setShowSearch(false);
+          } else {
+            setShowSearch(true);
+          }
+        }}
+        // onScroll = (event) => {
+        //   const scrollOffset = event.nativeEvent.contentOffset.y
+        // }
+        ListHeaderComponent={() => (
+          <View>
+            <ImageBackground
+              source={require('../../assets/banner1.jpg')}
+              imageStyle={{borderRadius: 15}}
+              style={{
+                width: '100%',
+                height: 110,
+                marginTop: 10,
+                paddingHorizontal: 15,
+                marginLeft: 15,
+              }}></ImageBackground>
+            <ListCategories />
+          </View>
+        )}
         showsVerticalScrollIndicator={false}
         numColumns={2}
         data={foods}
@@ -214,7 +240,6 @@ const style = StyleSheet.create({
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
-    
   },
   categoriesListContainer: {
     paddingVertical: 30,
@@ -238,7 +263,6 @@ const style = StyleSheet.create({
     borderRadius: 30,
     justifyContent: 'center',
     alignItems: 'center',
-    
   },
   card: {
     height: 220,

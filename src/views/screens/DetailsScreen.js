@@ -1,5 +1,12 @@
-import React from 'react';
-import {SafeAreaView, StyleSheet, View, Text, Image} from 'react-native';
+import React, {useState} from 'react';
+import {
+  SafeAreaView,
+  StyleSheet,
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import COLORS from '../../consts/colors';
@@ -7,7 +14,7 @@ import {SecondaryButton} from '../components/Button';
 
 const DetailsScreen = ({navigation, route}) => {
   const item = route.params;
-
+  const [count, setCount] = useState(0);
   return (
     <SafeAreaView style={{backgroundColor: COLORS.white}}>
       <View style={style.header}>
@@ -22,6 +29,31 @@ const DetailsScreen = ({navigation, route}) => {
             height: 280,
           }}>
           <Image source={item.image} style={{height: 220, width: 220}} />
+        </View>
+
+        <View style={{marginBottom: 10, marginLeft: 30}}>
+          <View style={style.actionBtn}>
+            <TouchableOpacity
+              onPress={() => {
+                if (count === 0) {
+                  setCount(0);
+                } else {
+                  setCount(count - 1);
+                }
+              }}>
+              <Icon name="remove" size={25} color={COLORS.white} />
+            </TouchableOpacity>
+            <Text
+              style={{fontWeight: 'bold', color: COLORS.white, fontSize: 18}}>
+              {count}
+            </Text>
+            <TouchableOpacity
+              onPress={() => {
+                setCount(count + 1);
+              }}>
+              <Icon name="add" size={25} color={COLORS.white} />
+            </TouchableOpacity>
+          </View>
         </View>
         <View style={style.details}>
           <View
@@ -63,7 +95,7 @@ const style = StyleSheet.create({
   },
   details: {
     paddingHorizontal: 20,
-    paddingTop: 40,
+    paddingTop: 30,
     paddingBottom: 60,
     backgroundColor: COLORS.primary,
     borderTopRightRadius: 40,
@@ -71,8 +103,8 @@ const style = StyleSheet.create({
   },
   iconContainer: {
     backgroundColor: COLORS.white,
-    height: 50,
-    width: 50,
+    height: 40,
+    width: 40,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 30,
@@ -82,6 +114,17 @@ const style = StyleSheet.create({
     lineHeight: 22,
     fontSize: 16,
     color: COLORS.white,
+  },
+  actionBtn: {
+    width: 80,
+    height: 30,
+    elevation: 15,
+    backgroundColor: COLORS.primary,
+    borderRadius: 30,
+    paddingHorizontal: 5,
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    alignContent: 'center',
   },
 });
 

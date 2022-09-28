@@ -9,6 +9,7 @@ import {
   Platform,
 } from 'react-native';
 import { Colors, Fonts } from '../../../assets/common/common';
+import COLORS from '../../../consts/colors';
 import { Rtext } from '../Rtext';
 // import Ionicons from 'react-native-vector-icons/Ionicons';
 const winHeight = Dimensions.get('window').height
@@ -92,10 +93,10 @@ const styles = StyleSheet.create({
     marginTop: 15,
     borderRadius: 10,
     shadowColor: 'rgba(0, 0, 0, 1)',
-    shadowOpacity: 0.3,
+    shadowOpacity: 0.2,
     elevation: 5,
     shadowRadius: 15,
-    shadowOffset: { width: 4, height: 4 },
+    shadowOffset: { width: 2, height: 2 },
   },
   inputStyle: {
     padding: 10,
@@ -107,8 +108,9 @@ const styles = StyleSheet.create({
     fontSize: 15,
     lineHeight: 20,
     color: 'black',
-    borderColor: '#C4C4C4',
-    borderWidth: 0.5,
+    
+    borderColor: COLORS.primary,
+    borderWidth: 1,
     fontFamily: Fonts.latoRegular,
     height: 45,
     borderRadius: 10,
@@ -140,7 +142,8 @@ const styles = StyleSheet.create({
     width: 24,
     resizeMode: 'contain',
     marginRight: 10,
-    tintColor: Colors.black,
+    tintColor: COLORS.primary,
+
   },
 });
 

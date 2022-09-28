@@ -6,6 +6,7 @@ import {
   Image,
   ImageBackground,
   Dimensions,
+  TouchableOpacity,
 } from 'react-native';
 import {TextInput} from 'react-native-gesture-handler';
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -13,6 +14,7 @@ import COLORS from '../../consts/colors';
 import {PrimaryButton} from '../components/Button';
 const {height, width} = Dimensions.get('window');
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { Ainput } from '../../CommonComponents/common/Ainput';
 const Login = props => {
   return (
     <SafeAreaView style={{flex: 1}}>
@@ -43,8 +45,25 @@ const Login = props => {
             source={require('../../assets/logo.png')}></Image>
         </View>
         <View style={{marginHorizontal: 15, width: width - 30}}>
-          <TextInputV placeholder={'Email'} />
-          <TextInputV placeholder={'Password'} showPass={true} />
+          <Ainput style={{
+            backgroundColor: '#fff',
+            paddingHorizontal: 5,
+            borderWidth: 1,
+            borderColor: COLORS.primary,
+          }} placeholder={'Email'} />
+          <Ainput
+          style={{
+            backgroundColor: '#fff',
+            paddingHorizontal: 5,
+            borderWidth: 1,
+            borderColor: COLORS.primary,
+          }}
+          secureTextEntry={true}
+          // value={Password}
+          // onChangeText={setPassword}
+          eye={true}
+          placeholder={'Password.'}></Ainput>
+          {/* <TextInputV  placeholder={'Password'} showPass={true} /> */}
           <View style={{marginTop: 20}}>
             <PrimaryButton
               title="Login"
@@ -62,33 +81,4 @@ const Login = props => {
   );
 };
 
-const TextInputV = ({placeholder = '', showPass = false}) => {
-  return (
-    <View
-      style={{
-        backgroundColor: '#fff',
-        paddingHorizontal: 5,
-        borderWidth: 1,
-        borderColor: COLORS.primary,
-        borderRadius: 10,
-        marginTop: 20,
-      }}>
-      <TextInput placeholder={placeholder}></TextInput>
-      {showPass && (
-        <View
-          style={{
-            position: 'absolute',
-            top: 12,
-            right: 10,
-            backgroundColor: COLORS.primary,
-            paddingHorizontal: 5,
-            paddingVertical: 3,
-            borderRadius: 5,
-          }}>
-          <Text style={{color: COLORS.white}}>Show Password</Text>
-        </View>
-      )}
-    </View>
-  );
-};
 export default Login;
