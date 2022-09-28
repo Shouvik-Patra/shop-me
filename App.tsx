@@ -38,6 +38,9 @@ import Splash from './src/views/screens/Splash';
 import {useEffect} from 'react';
 import Login from './src/views/screens/Login';
 import Registration from './src/views/screens/Registration';
+import store from './src/store';
+import { Provider } from 'react-redux';
+import HomeScreen from './src/views/screens/HomeScreen';
 const Stack = createStackNavigator();
 LogBox.ignoreLogs([
   "[react-native-gesture-handler] Seems like you're using an old API with gesture components, check out new Gestures system!",
@@ -56,7 +59,11 @@ const App = () => {
   // }
 
   return (
+//   
     <NavigationContainer>
+        <Provider store={store}>
+
+ 
       <StatusBar backgroundColor={COLORS.white} barStyle="dark-content" />
       <Stack.Navigator screenOptions={{headerShown: false}}>
       
@@ -65,8 +72,11 @@ const App = () => {
         <Stack.Screen name="BoardScreen" component={OnBoardScreen} />
         <Stack.Screen name="Home" component={BottomNavigator} />
         <Stack.Screen name="DetailsScreen" component={DetailsScreen} />
+        <Stack.Screen name="HomeScreen" component={HomeScreen} />
       </Stack.Navigator>
+      </Provider>
     </NavigationContainer>
+   
   );
 };
 
