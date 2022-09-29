@@ -42,7 +42,7 @@ const Slice = createSlice({
         action.payload.headerText !== '' ||
         action.payload.headerText !== undefined
           ? action.payload.headerText
-          : 'Welcome TO  GSTCOMMAN';
+          : 'Welcome TO  SHOP ME';
       state.headerColor = action?.payload?.headerColor
         ? action.payload.headerColor
         : Colors.primaryColor;
@@ -82,7 +82,7 @@ const Slice = createSlice({
       state.textInput = true;
       state.headerText = action?.payload?.headerText
         ? action.payload.headerText
-        : 'Welcome TO  GSTCOMMAN';
+        : 'Welcome TO  SHOPME';
       state.cancelButtonText = action?.payload?.cancelButtonText
         ? action.payload.cancelButtonText
         : 'Cancel';

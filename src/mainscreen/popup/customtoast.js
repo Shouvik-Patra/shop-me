@@ -10,7 +10,7 @@ import {
 import {useDispatch, useSelector} from 'react-redux';
 import {Colors, Fonts} from '../../assets/common/common';
 import {RootState} from '../../store';
-import {setToastMsgToNUll} from '../../Store/popup';
+import {setToastMsgToNUll} from '../../store/popup';
 // import { setToastMsgToNUll } from '../../store/mentorRegistration/MentorRegistration';
 
 const customtoast = () => {

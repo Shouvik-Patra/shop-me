@@ -39,7 +39,7 @@ import {useEffect} from 'react';
 import Login from './src/views/screens/Login';
 import Registration from './src/views/screens/Registration';
 import store from './src/store';
-import { Provider } from 'react-redux';
+import {Provider} from 'react-redux';
 import HomeScreen from './src/views/screens/HomeScreen';
 const Stack = createStackNavigator();
 LogBox.ignoreLogs([
@@ -59,24 +59,20 @@ const App = () => {
   // }
 
   return (
-//   
+    //
     <NavigationContainer>
-        <Provider store={store}>
-
- 
-      <StatusBar backgroundColor={COLORS.white} barStyle="dark-content" />
-      <Stack.Navigator screenOptions={{headerShown: false}}>
-      
-      <Stack.Screen name="Login" component={Login} />
-      <Stack.Screen name="Registration" component={Registration} />
-        <Stack.Screen name="BoardScreen" component={OnBoardScreen} />
-        <Stack.Screen name="Home" component={BottomNavigator} />
-        <Stack.Screen name="DetailsScreen" component={DetailsScreen} />
-        <Stack.Screen name="HomeScreen" component={HomeScreen} />
-      </Stack.Navigator>
+      <Provider store={store}>
+        <StatusBar backgroundColor={COLORS.white} barStyle="dark-content" />
+        <Stack.Navigator screenOptions={{headerShown: false}}>
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="Registration" component={Registration} />
+          <Stack.Screen name="BoardScreen" component={OnBoardScreen} />
+          <Stack.Screen name="Home" component={BottomNavigator} />
+          <Stack.Screen name="DetailsScreen" component={DetailsScreen} />
+          <Stack.Screen name="HomeScreen" component={HomeScreen} />
+        </Stack.Navigator>
       </Provider>
     </NavigationContainer>
-   
   );
 };
 
