@@ -10,10 +10,10 @@ import {
 import {useDispatch, useSelector} from 'react-redux';
 import {Colors, Fonts} from '../../assets/common/common';
 import {RootState} from '../../store';
-import {setToastMsgToNUll} from '../../Store/popup';
+import {setToastMsgToNUll} from '../../store/popup';
 // import { setToastMsgToNUll } from '../../store/mentorRegistration/MentorRegistration';
 
-const customtoast = () => {
+const CustomToast = () => {
   const dispatch = useDispatch();
   const toastMsg = useSelector(state => state.popup.message);
   const fadeAnim = useRef(new Animated.Value(0)).current;
@@ -29,7 +29,7 @@ const customtoast = () => {
     setTimeout(() => {
       fadeOut();
       dispatch(setToastMsgToNUll());
-    }, 4000);
+    }, 2000);
   };
   useEffect(() => {
     if (toastMsg !== '') {
@@ -80,4 +80,4 @@ const styles = StyleSheet.create({
     marginHorizontal: 15,
   },
 });
-export default customtoast;
+export default CustomToast;

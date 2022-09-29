@@ -18,7 +18,7 @@ const middlewareState = [
 
 const rootReducer = combineReducers({
   auth: authReducer,
-  //popup: popupReducer,
+  popup: popupReducer,
  
 });
 
