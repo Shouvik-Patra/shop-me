@@ -9,6 +9,7 @@ import CartScreen from '../screens/CartScreen';
 import Search from '../screens/Search';
 import Products from '../screens/Products';
 import Category from '../screens/Category';
+import order from '../screens/order';
 
 const Tab = createBottomTabNavigator();
 
@@ -40,6 +41,15 @@ const BottomNavigator = () => {
         options={{
           tabBarIcon: ({color}) => (
             <Icon name="local-mall" color={color} size={28} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="order"
+        component={order}
+        options={{
+          tabBarIcon: ({color}) => (
+            <Icon name="list" color={color} size={28} />
           ),
         }}
       />
@@ -87,5 +97,4 @@ const BottomNavigator = () => {
     </Tab.Navigator>
   );
 };
-
 export default BottomNavigator;

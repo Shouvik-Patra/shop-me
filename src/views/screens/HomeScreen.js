@@ -47,7 +47,7 @@ const HomeScreen = ({navigation}) => {
                   selectedCategoryIndex == index
                     ? COLORS.primary
                     : COLORS.secondary,
-                ...style.categoryBtn,
+                    ...style.categoryBtn,
               }}>
               <View style={style.categoryBtnImgCon}>
                 <Image
