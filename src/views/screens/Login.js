@@ -85,7 +85,7 @@ const Login = props => {
                       password: Password,
                     }),
                   ).then(() => {
-                    props.navigation.navigate('HomeScreen');
+                    props.navigation.navigate('Home');
                     
                       setEmail(false),
                       setPassword(false);

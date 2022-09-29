@@ -10,38 +10,18 @@
 import 'react-native-gesture-handler';
 import React from 'react';
 import {
-  SafeAreaView,
-  ScrollView,
   StatusBar,
   StyleSheet,
-  Text,
-  useColorScheme,
-  View,
 } from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-import {LogBox} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
+import { LogBox } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
 import COLORS from './src/consts/colors';
-import DetailsScreen from './src/views/screens/DetailsScreen';
-import BottomNavigator from './src/views/navigation/BottomNavigator';
-import OnBoardScreen from './src/views/screens/OnBoardScreen';
-import {useState} from 'react';
-import Splash from './src/views/screens/Splash';
-import {useEffect} from 'react';
-import Login from './src/views/screens/Login';
-import Registration from './src/views/screens/Registration';
+import { useState } from 'react';
 import store from './src/store';
 import { Provider } from 'react-redux';
-import HomeScreen from './src/views/screens/HomeScreen';
-const Stack = createStackNavigator();
+import StackNav from './src/views/navigation/StackNav';
+import DrawerNav from './src/views/navigation/DrawerNav';
 LogBox.ignoreLogs([
   "[react-native-gesture-handler] Seems like you're using an old API with gesture components, check out new Gestures system!",
 ]);
@@ -59,24 +39,17 @@ const App = () => {
   // }
 
   return (
-//   
+    //   
     <NavigationContainer>
-        <Provider store={store}>
-
- 
+      <Provider store={store}>
       <StatusBar backgroundColor={COLORS.white} barStyle="dark-content" />
-      <Stack.Navigator screenOptions={{headerShown: false}}>
-      
-      <Stack.Screen name="Login" component={Login} />
-      <Stack.Screen name="Registration" component={Registration} />
-        <Stack.Screen name="BoardScreen" component={OnBoardScreen} />
-        <Stack.Screen name="Home" component={BottomNavigator} />
-        <Stack.Screen name="DetailsScreen" component={DetailsScreen} />
-        <Stack.Screen name="HomeScreen" component={HomeScreen} />
-      </Stack.Navigator>
+        <DrawerNav />
+
+        
+        {/* <StackNav/> */}
       </Provider>
     </NavigationContainer>
-   
+
   );
 };
 

@@ -14,7 +14,7 @@ import {SecondaryButton} from '../components/Button';
 
 const DetailsScreen = ({navigation, route}) => {
   const item = route.params;
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(1);
   return (
     <SafeAreaView style={{backgroundColor: COLORS.white}}>
       <View style={style.header}>
@@ -32,28 +32,6 @@ const DetailsScreen = ({navigation, route}) => {
         </View>
 
         <View style={{marginBottom: 10, marginLeft: 30}}>
-          <View style={style.actionBtn}>
-            <TouchableOpacity
-              onPress={() => {
-                if (count === 0) {
-                  setCount(0);
-                } else {
-                  setCount(count - 1);
-                }
-              }}>
-              <Icon name="remove" size={25} color={COLORS.white} />
-            </TouchableOpacity>
-            <Text
-              style={{fontWeight: 'bold', color: COLORS.white, fontSize: 18}}>
-              {count}
-            </Text>
-            <TouchableOpacity
-              onPress={() => {
-                setCount(count + 1);
-              }}>
-              <Icon name="add" size={25} color={COLORS.white} />
-            </TouchableOpacity>
-          </View>
         </View>
         <View style={style.details}>
           <View
@@ -69,7 +47,43 @@ const DetailsScreen = ({navigation, route}) => {
             <View style={style.iconContainer}>
               <Icon name="favorite-border" color={COLORS.primary} size={25} />
             </View>
+
+            
           </View>
+
+          
+<View style = {{flexDirection :'row' , alignItems :'center' , marginTop : 20 , justifyContent :'space-between' , marginRight : 20}}>
+<View style={style.actionBtn}>
+            <TouchableOpacity
+              onPress={() => {
+                if (count === 1) {
+              return
+                } else {
+                  setCount(count - 1);
+                }
+              }}>
+              <Icon name="remove" size={25} color={COLORS.primary} />
+            </TouchableOpacity>
+            <Text
+              style={{fontWeight: 'bold', color: COLORS.primary, fontSize: 18}}>
+              {count}
+            </Text>
+            <TouchableOpacity
+              onPress={() => {
+                setCount(count + 1);
+              }}>
+              <Icon name="add" size={25} color={COLORS.primary} />
+            </TouchableOpacity>
+          </View>
+
+          <Text
+              style={{fontWeight: 'bold', color: COLORS.white, fontSize: 18}}>
+              {" ̥₹ ̥ 1100"}
+            </Text>
+     
+</View>
+
+          
           <Text style={style.detailsText}>
             Lorem Ipsum is simply dummy text of the printing and typesetting
             industry. Lorem Ipsum has been the industry's standard dummy text
@@ -77,9 +91,11 @@ const DetailsScreen = ({navigation, route}) => {
             and scrambled it to make a type specimen book. It has survived not
             only five centuries.
           </Text>
+       
           <View style={{marginTop: 40, marginBottom: 40}}>
             <SecondaryButton title="Add To Cart" />
           </View>
+
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -116,10 +132,10 @@ const style = StyleSheet.create({
     color: COLORS.white,
   },
   actionBtn: {
-    width: 80,
+    width: 120,
     height: 30,
     elevation: 15,
-    backgroundColor: COLORS.primary,
+    backgroundColor: COLORS.white,
     borderRadius: 30,
     paddingHorizontal: 5,
     flexDirection: 'row',
