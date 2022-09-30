@@ -9,12 +9,11 @@ import {
 
 import { useDispatch } from 'react-redux'
 import { createDrawerNavigator } from '@react-navigation/drawer';
-// import { Colors } from '../assets/common/common';
-// import { Rtext } from '../CommonComponents/common/Rtext';
 import {Rtext} from '../../CommonComponents/common/Rtext'
 // import { userLogoutSuccess } from '../Store/auth';
 import StackNav from './StackNav';
 import { Colors } from '../../assets/common/common';
+import COLORS from '../../consts/colors';
 
 const Drawer = createDrawerNavigator();
 const DrawerNav = () => {
@@ -25,19 +24,20 @@ const DrawerNav = () => {
             drawerContent={props => (
                 <View style={{ flex: 1 }}>
                     <ImageBackground
-                        // source={require('../../assets/images/bg.png')}
-                        style={{ paddingVertical: 30 }}
+                         source={require('../../assets/bg2.jpg')}
+                        style={{ paddingVertical: 20 }}
                     >
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                             <TouchableOpacity>
                                 <Image
-                                    // source={require('../../assets/icons/avatar.png')}
+                                     source={require('../../assets/person.png')}
                                     style={{
                                         borderColor: '#808080',
-                                        height: 40,
-                                        width: 40,
+                                        height: 50,
+                                        width: 50,
                                         alignSelf: 'baseline',
                                         marginLeft: 10,
+                                        borderRadius:50
                                     }}
                                 ></Image>
                             </TouchableOpacity>
@@ -53,33 +53,53 @@ const DrawerNav = () => {
                     </ImageBackground>
                     <DrawerItem
                         onPress={() => props.navigation.closeDrawer()}
-                        title="Profile"
-                        // source={require('../../assets/icons/avatar.png')}
+                        title="All Categories"
+                         source={require('../../assets/icons/apps.png')}
                     ></DrawerItem>
                     <DrawerItem
                         onPress={() => props.navigation.closeDrawer()}
-                        title="User Information"
-                        // source={require('../../assets/icons/userinfo.png')}
+                        title="Trending Store"
+                        source={require('../../assets/icons/store.png')}
                     ></DrawerItem>
                     <DrawerItem
                         onPress={() => props.navigation.closeDrawer()}
-                        title="User Status"
-                        // source={require('../../assets/icons/status.png')}
+                        title="Offer Zone"
+                         source={require('../../assets/icons/price-tag.png')}
                     ></DrawerItem>
                     <DrawerItem
                         onPress={() => props.navigation.closeDrawer()}
-                        title="Completion"
-                        // source={require('../../assets/icons/complete.png')}
+                        title="My Order"
+                         source={require('../../assets/icons/shopping-bag.png')}
                     ></DrawerItem>
                     <DrawerItem
                         onPress={() => props.navigation.closeDrawer()}
-                        title="Settings"
-                        // source={require('../../assets/icons/settings.png')}
+                        title="Coupones"
+                         source={require('../../assets/icons/coupon.png')}
                     ></DrawerItem>
                     <DrawerItem
                         onPress={() => props.navigation.closeDrawer()}
-                        title="Share"
-                        // source={require('../../assets/icons/share.png')}
+                        title="My Cart"
+                         source={require('../../assets/icons/cart.png')}
+                    ></DrawerItem>
+                     <DrawerItem
+                        onPress={() => props.navigation.closeDrawer()}
+                        title="My Wishlist"
+                         source={require('../../assets/icons/wishlist.png')}
+                    ></DrawerItem>
+                     <DrawerItem
+                        onPress={() => props.navigation.closeDrawer()}
+                        title="My Account"
+                        source={require('../../assets/icons/prof.png')}
+                    ></DrawerItem>
+                     <DrawerItem
+                        onPress={() => props.navigation.closeDrawer()}
+                        title="My Notification"
+                         source={require('../../assets/icons/bell.png')}
+                    ></DrawerItem>
+                     <DrawerItem
+                        onPress={() => props.navigation.closeDrawer()}
+                        title="Help Centre"
+                        source={require('../../assets/icons/helpline.png')}
                     ></DrawerItem>
                     <View
                         style={{ position: 'absolute', bottom: 20, left: 0, width: '100%' }}
@@ -118,16 +138,17 @@ export default DrawerNav;
 
 const DrawerItem = ({ source, title = "" }) => {
     return (
-        <TouchableOpacity>
-            <View>
+        <TouchableOpacity >
+            <ImageBackground
+            source={require('../../assets/bg1.jpg')}>
                 <View style={{ flexDirection: "row", paddingTop: 10, alignItems: "center" }}>
                     <View style={{ width: 60, marginLeft: 10 }}>
-                        {/* <Image source={source} style={{ width: 30, height: 30, tintColor: Colors.primaryColor }}></Image> */}
+                       <Image source={source} style={{ width: 25, height: 25, tintColor: COLORS.primary }}></Image> 
                     </View>
                     <Text>{title}</Text>
                 </View>
                 <View style={{ height: 1, backgroundColor: Colors.lightSilver, width: "90%", marginTop: 8, alignSelf: "center" }}></View>
-            </View>
+            </ImageBackground>
         </TouchableOpacity>
     )
 }
