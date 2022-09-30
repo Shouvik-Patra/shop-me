@@ -3,6 +3,7 @@ import {ActivityIndicator, Image, TouchableOpacity} from 'react-native';
 import {Rtext} from '../Rtext';
 import {Colors, Fonts} from '../../../assets/common/common';
 import {View} from 'react-native-animatable';
+import COLORS from '../../../consts/colors';
 const CusButtom = ({
   children,
   text,
@@ -20,13 +21,13 @@ const CusButtom = ({
       onPress={onpress}
       style={{
         flexDirection: 'row',
-        backgroundColor: '#4785ff',
+        backgroundColor: COLORS.primary,
         alignItems: 'center',
         justifyContent: 'center',
         paddingVertical: 12,
-        borderRadius: 12,
+        borderRadius: 30,
         marginTop: 15,
-        borderColor: '#fff',
+        borderColor: COLORS.secondary,
         borderWidth: 1,
         ...BTNstyle,
       }}>

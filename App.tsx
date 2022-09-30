@@ -76,20 +76,20 @@ const MainNav = () => {
   );
   // const NetInfo = useNetInfo();
 
-  console.log('statestatestatestatestate', state);
+  console.log('state Data==>>==>>', state);
 
   console.log(
-    'isUserLoggedIn',
+    'isUserLoggedIn==>>',
     isUserLoggedIn,
-    'messagePop',
+    'messagePop==>>',
     messagePop,
-    'textInput',
+    'textInput==>>',
     textInput,
-    'successFailure',
+    'successFailure==>>',
     successFailure,
-    'loader',
+    'loader==>>',
     loader,
-    'successFailureType',
+    'successFailureType==>>',
     successFailureType,
   );
 
