@@ -8,6 +8,7 @@ const { width, height } = Dimensions.get('window');
 import DatePicker from 'react-native-date-picker';
 import moment from 'moment';
 import { Colors, Fonts } from '../../assets/common/common';
+import COLORS from '../../consts/colors';
 const DatePickerr = ({ modalVisble, onDateChange, selectedDate, BtnTxt, onSubmit, projectDate = false }) => {
     var startdate = moment();
     let min_date = moment().subtract(40, 'years');
@@ -34,7 +35,7 @@ const DatePickerr = ({ modalVisble, onDateChange, selectedDate, BtnTxt, onSubmit
                 <CusButtom onpress={() => {
 
                     modalVisble(false)
-                }} BTNstyle={{ width: width - 60, backgroundColor: Colors.primaryColor, paddingHorizontal: 10, alignSelf: "center", paddingVertical: 15 }} text={"Submit"}></CusButtom>
+                }} BTNstyle={{ width: width - 60, backgroundColor: COLORS.primary, paddingHorizontal: 10, alignSelf: "center", paddingVertical: 15 }} text={"Submit"}></CusButtom>
             </View>
         </Modal>
     )
@@ -46,7 +47,7 @@ export default DatePickerr;
 const styles = StyleSheet.create({
     modalMainView: {
         justifyContent: 'flex-start',
-        backgroundColor: Colors.white,
+        backgroundColor: COLORS.secondary,
         width: width * 0.9,
         borderRadius: 5,
         padding: 20,
