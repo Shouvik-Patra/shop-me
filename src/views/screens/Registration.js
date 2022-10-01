@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   Text,
   StyleSheet,
@@ -8,15 +8,17 @@ import {
   Dimensions,
   TouchableOpacity,
 } from 'react-native';
-import {TextInput} from 'react-native-gesture-handler';
-import {SafeAreaView} from 'react-native-safe-area-context';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import COLORS from '../../consts/colors';
-import {PrimaryButton} from '../components/Button';
-const {height, width} = Dimensions.get('window');
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {Ainput} from '../../CommonComponents/common/Ainput';
-import {useDispatch} from 'react-redux';
+import { PrimaryButton } from '../components/Button';
+const { height, width } = Dimensions.get('window');
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { Ainput } from '../../CommonComponents/common/Ainput';
+import { useDispatch } from 'react-redux';
 import { registration } from '../../store/auth';
+import { Colors } from '../../assets/common/common';
+import DatePickerr from '../../mainscreen/popup/DatePicker';
+import moment from 'moment';
 const Registration = props => {
   const dispatch = useDispatch();
   const [name, setName] = useState('');
@@ -27,7 +29,7 @@ const Registration = props => {
   const [DateModal, setDateModal] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={{ flex: 1 }}>
       <KeyboardAwareScrollView>
         <View
           style={{
@@ -54,7 +56,7 @@ const Registration = props => {
               }}
               source={require('../../assets/logo.png')}></Image>
           </View>
-          <View style={{marginHorizontal: 15, width: width - 30}}>
+          <View style={{ marginHorizontal: 15, width: width - 30 }}>
             <Ainput
               value={name}
               onChangeText={setName}
@@ -67,8 +69,22 @@ const Registration = props => {
             />
             <Ainput
               value={Email}
+              keyboardType="email-address"
               onChangeText={setEmail}
               placeholder={'Email'}
+            />
+            <CommonButton
+              onPress={() => {
+                setDateModal(true);
+                setSelectedDate(moment().toDate());
+              }}
+              image={false}
+              text={
+
+                selectedDate === null
+                  ? 'DOB'
+                  : moment(selectedDate, 'YYYY-MM-DD').format('DD MMM YYYY')
+              }
             />
             <Ainput
               value={Password}
@@ -76,31 +92,39 @@ const Registration = props => {
               placeholder={'Password'}
               eye={true}
             />
-            <View style={{marginTop: 20}}>
+            <View style={{ marginTop: 20 }}>
               <TouchableOpacity
               >
                 <PrimaryButton
-                onPress={()=>{
-                  dispatch(
-                    registration({
-                    username: name,
-                    email: Email,
-                    password: Password,
-                    ph: Phone,
-                    dob: "10/09/1995"
-                  })).then(()=>{
-
-                    props.navigation.navigate('Login')
-                    setName(false),
-                    setEmail(false),
-                    setPhone(false),
-                    setPassword(false)
-                  })
-                }}
+                  onPress={() => {
+                    dispatch(
+                      registration({
+                        username: name,
+                        email: Email,
+                        password: Password,
+                        ph: Phone,
+                        dob: selectedDate
+                      })).then(() => {
+                        props.navigation.navigate('Login')
+                        setName(false),
+                          setEmail(false),
+                          setPhone(false),
+                          setPassword(false)
+                      })
+                  }}
                   title="Registration"
-                 // onPress={() => props.navigation.navigate('BoardScreen')}
+                // onPress={() => props.navigation.navigate('BoardScreen')}
                 />
               </TouchableOpacity>
+              {DateModal && (
+
+                <DatePickerr
+                  onDateChange={setSelectedDate}
+                  selectedDate={selectedDate === null ? new Date() : selectedDate}
+                  modalVisble={() => setDateModal(false)}
+                />
+
+              )}
             </View>
           </View>
         </View>
@@ -110,3 +134,36 @@ const Registration = props => {
 };
 
 export default Registration;
+const CommonButton = ({ onPress, text = '', image = true }) => {
+  return (
+    <TouchableOpacity onPress={onPress}>
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'space-around',
+          width: '100%',
+          borderRadius: 10,
+          backgroundColor: '#fff',
+          marginTop: 15,
+          paddingVertical: 10,
+          paddingHorizontal: 12,
+          borderColor: COLORS.primary,
+          borderWidth: 1.5,
+          shadowColor: 'rgba(0, 0, 0, 1)',
+          shadowOpacity: 0.2,
+          elevation: 5,
+          shadowRadius: 15,
+          shadowOffset: { width: 2, height: 2 }
+
+        }}>
+
+
+        <Text style={{ width: 200 }}>{text}</Text>
+        <Image
+          source={require('../../assets/down-arrow.png')}
+          style={{ height: 25, width: 25, resizeMode: 'contain',tintColor:COLORS.primary }}
+        />
+      </View>
+    </TouchableOpacity>
+  );
+};

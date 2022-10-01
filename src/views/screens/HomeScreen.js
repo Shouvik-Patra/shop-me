@@ -124,7 +124,7 @@ const HomeScreen = ({ navigation }) => {
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
       <View style={style.header}>
         <Image
-          source={require('../../assets/apps.png')}
+          source={require('../../assets/icons/apps.png')}
           style={{
             // backgroundColor: COLORS.primary,
             alignItems: 'center',

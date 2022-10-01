@@ -14,12 +14,13 @@ import HomeScreen from '../screens/HomeScreen';
 
 import { createStackNavigator } from '@react-navigation/stack';
 import order from '../screens/order';
-// import DetailsScreen from './src/views/screens/DetailsScreen';
-// import BottomNavigator from './src/views/navigation/BottomNavigator';
-// import OnBoardScreen from './src/views/screens/OnBoardScreen';
-// import Login from './src/views/screens/Login';
-// import Registration from './src/views/screens/Registration';
-// import HomeScreen from './src/views/screens/HomeScreen';
+import DetailsScreen from './src/views/screens/DetailsScreen';
+import BottomNavigator from './src/views/navigation/BottomNavigator';
+import OnBoardScreen from './src/views/screens/OnBoardScreen';
+import Login from './src/views/screens/Login';
+  import Registration from './src/views/screens/Registration';
+ import HomeScreen from './src/views/screens/HomeScreen';
+
 const Stack = createStackNavigator();
 
 const StackNav = () => {
