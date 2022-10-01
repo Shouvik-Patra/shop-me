@@ -31,7 +31,7 @@ const loginSlice = createSlice({
     userData :{},
     token: null,
     isUserLoggedIn: false,
-   
+    userTokenInfo: {},
   },
 
   reducers: {
@@ -87,6 +87,6 @@ const loginSlice = createSlice({
 
 
 
-//export const { userLoginSuccess, userLogoutSuccess , setUserTokenInfo } = loginSlice.actions;
+export const { userLoginSuccess, userLogoutSuccess , setUserTokenInfo } = loginSlice.actions;
 export { registration,login};
 export default loginSlice.reducer;
