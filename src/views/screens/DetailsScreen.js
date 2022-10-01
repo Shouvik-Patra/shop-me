@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -7,19 +7,21 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
-import {ScrollView} from 'react-native-gesture-handler';
+import { ScrollView } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import COLORS from '../../consts/colors';
-import {SecondaryButton} from '../components/Button';
+import { SecondaryButton } from '../components/Button';
 
-const DetailsScreen = ({navigation, route}) => {
+const DetailsScreen = ({ navigation, route }) => {
   const item = route.params;
   const [count, setCount] = useState(1);
+  const[put,setput]=useState(false)
+  console.log('item@@@@@@@@@@@', item);
   return (
-    <SafeAreaView style={{backgroundColor: COLORS.white}}>
+    <SafeAreaView style={{ backgroundColor: COLORS.white }}>
       <View style={style.header}>
         <Icon name="arrow-back-ios" size={28} onPress={navigation.goBack} />
-        <Text style={{fontSize: 20, fontWeight: 'bold'}}>Details</Text>
+        <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Details</Text>
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View
@@ -28,10 +30,10 @@ const DetailsScreen = ({navigation, route}) => {
             alignItems: 'center',
             height: 280,
           }}>
-          <Image source={item.image} style={{height: 220, width: 220}} />
+          <Image source={require('../../assets/meatPizza.png')} style={{ height: 220, width: 220 }} />
         </View>
 
-        <View style={{marginBottom: 10, marginLeft: 30}}>
+        <View style={{ marginBottom: 10, marginLeft: 30 }}>
         </View>
         <View style={style.details}>
           <View
@@ -41,59 +43,62 @@ const DetailsScreen = ({navigation, route}) => {
               alignItems: 'center',
             }}>
             <Text
-              style={{fontSize: 25, fontWeight: 'bold', color: COLORS.white}}>
+              style={{ fontSize: 25, fontWeight: 'bold', color: COLORS.white }}>
               {item.name}
             </Text>
             <View style={style.iconContainer}>
+              <TouchableOpacity>
               <Icon name="favorite-border" color={COLORS.primary} size={25} />
+              </TouchableOpacity>
             </View>
 
-            
+
           </View>
 
-          
-<View style = {{flexDirection :'row' , alignItems :'center' , marginTop : 20 , justifyContent :'space-between' , marginRight : 20}}>
-<View style={style.actionBtn}>
-            <TouchableOpacity
-              onPress={() => {
-                if (count === 1) {
-              return
-                } else {
-                  setCount(count - 1);
-                }
-              }}>
-              <Icon name="remove" size={25} color={COLORS.primary} />
-            </TouchableOpacity>
+
+          <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 20, justifyContent: 'space-between', marginRight: 20 }}>
+            <View style={style.actionBtn}>
+              <TouchableOpacity
+                onPress={() => {
+                  if (count === 1) {
+                    return
+                  } else {
+                    setCount(count - 1);
+                  }
+                }}>
+                <Icon name="remove" size={25} color={COLORS.primary} />
+              </TouchableOpacity>
+              <Text
+                style={{ fontWeight: 'bold', color: COLORS.primary, fontSize: 18 }}>
+                {count}
+              </Text>
+              <TouchableOpacity
+                onPress={() => {
+                  setCount(count + 1);
+                }}>
+                <Icon name="add" size={25} color={COLORS.primary} />
+              </TouchableOpacity>
+            </View>
+
             <Text
-              style={{fontWeight: 'bold', color: COLORS.primary, fontSize: 18}}>
-              {count}
+              style={{ fontWeight: 'bold', color: COLORS.white, fontSize: 18 }}>
+              ₹{item.price * count}
             </Text>
-            <TouchableOpacity
-              onPress={() => {
-                setCount(count + 1);
-              }}>
-              <Icon name="add" size={25} color={COLORS.primary} />
-            </TouchableOpacity>
+
           </View>
 
-          <Text
-              style={{fontWeight: 'bold', color: COLORS.white, fontSize: 18}}>
-              {" ̥₹ ̥ 1100"}
-            </Text>
-     
-</View>
 
-          
           <Text style={style.detailsText}>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries.
+           {item.desc}
           </Text>
-       
-          <View style={{marginTop: 40, marginBottom: 40}}>
-            <SecondaryButton title="Add To Cart" />
+
+          <View style={{ marginTop: 40, marginBottom: 40 }}>
+            <SecondaryButton 
+            onPress={()=>{
+              navigation.navigate('order' ,{item:item,count:count})
+            }}
+            
+            title="Add To Cart" />
           </View>
 
         </View>
