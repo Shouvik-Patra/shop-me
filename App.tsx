@@ -76,7 +76,7 @@ const MainNav = () => {
   );
   // const NetInfo = useNetInfo();
 
-  console.log('state Data==>>==>>', state);
+ // console.log('state Data==>>==>>', state);
 
   console.log(
     'isUserLoggedIn==>>',

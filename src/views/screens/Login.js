@@ -12,13 +12,13 @@ import {
 import { TextInput } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import COLORS from '../../consts/colors';
-import { PrimaryButton } from '../components/Button';
+import jwt_decode from 'jwt-decode';
 const { height, width } = Dimensions.get('window');
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Ainput } from '../../CommonComponents/common/Ainput';
 import { LoaderOff, LoaderOn } from '../../store/popup';
 import { useDispatch } from 'react-redux';
-import { login } from '../../store/auth';
+import { login, setUserTokenInfo, userLoginSuccess } from '../../store/auth';
 import { CusButtom } from '../../CommonComponents/common/CusButtom';
 import { Rtext } from '../../CommonComponents/common/Rtext';
 const Login = props => {
@@ -141,7 +141,7 @@ const Login = props => {
                           dispatch(userLoginSuccess());
                           console.log('Reqdata  ==>', Reqdata);
                           var userData = jwt_decode(Reqdata?.payload?.token.replace('Bearer ', ''));
-                          console.log("TOKEN Data==>>==>>", userData,);
+                          console.log("TOKEN Data==>>==>>", userData);
                           dispatch(setUserTokenInfo(userData))
                         } else {
                           dispatch(
@@ -206,21 +206,7 @@ const Login = props => {
                       });
                   }
                 }}
-                // onPress={() => {
-                //   dispatch(LoaderOn());
-                //   dispatch(
-                //     login({
-                //       email: Email,
-                //       password: Password,
-                //     }),
-                //   ).then(() => {
-                //     props.navigation.navigate('Home');
-
-                //       setEmail(false),
-                //       setPassword(false);
-                //   });
-                //   dispatch(LoaderOff());
-                // }}
+              
                 title="Login"
               />
             </View>
