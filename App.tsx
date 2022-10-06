@@ -53,8 +53,10 @@ const App = () => {
       <Provider store={store}>
         <StatusBar backgroundColor={COLORS.white} barStyle="dark-content" />
 
-        <MainNav />
-        {/* <StackNav/> */}
+        {/* <MainNav /> */}
+        <StackNav/>
+        
+        {/* <DrawerNav/> */}
       </Provider>
     </NavigationContainer>
   );

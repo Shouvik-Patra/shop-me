@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   Dimensions,
   Image,
@@ -19,17 +19,29 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import COLORS from '../../consts/colors';
 import categories from '../../consts/categories';
 import foods from '../../consts/foods';
-import {Rtext} from '../../CommonComponents/common/Rtext';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
-const {width} = Dimensions.get('screen');
+import { Rtext } from '../../CommonComponents/common/Rtext';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { getallproduct } from '../../store/product';
+import { useDispatch, useSelector } from 'react-redux';
+const { width } = Dimensions.get('screen');
 const cardWidth = width / 2 - 20;
 
-const HomeScreen = ({navigation}) => {
+const HomeScreen = ({ navigation }) => {
   const [scollVal, setScollVal] = useState(0);
   const [showSearch, setShowSearch] = useState(true);
   const [selectedCategoryIndex, setSelectedCategoryIndex] = React.useState(0);
   const ref = useRef();
   const [scrolled, setScrolled] = useState(true);
+  const dispatch = useDispatch()
+  const data = useSelector(state => state.product.getallproduct);
+  console.log('********data************',data);
+  useEffect(() => {
+    dispatch(getallproduct())
+  }, [])
+
+
+
+
   const ListCategories = () => {
     return (
       <ScrollView
@@ -47,12 +59,12 @@ const HomeScreen = ({navigation}) => {
                   selectedCategoryIndex == index
                     ? COLORS.primary
                     : COLORS.secondary,
-                    ...style.categoryBtn,
+                ...style.categoryBtn,
               }}>
               <View style={style.categoryBtnImgCon}>
                 <Image
                   source={category.image}
-                  style={{height: 35, width: 35, resizeMode: 'cover'}}
+                  style={{ height: 35, width: 35, resizeMode: 'cover' }}
                 />
               </View>
               <Text
@@ -73,20 +85,21 @@ const HomeScreen = ({navigation}) => {
       </ScrollView>
     );
   };
-  const Card = ({food}) => {
+  const Card = ({ food }) => {
+    console.log('food&&&&&&&&&&&&&',food);
     return (
       <TouchableHighlight
         underlayColor={COLORS.white}
         activeOpacity={0.9}
         onPress={() => navigation.navigate('DetailsScreen', food)}>
         <View style={style.card}>
-          <View style={{alignItems: 'center', top: 0}}>
-            <Image source={food.image} style={{height: 120, width: 120}} />
+          <View style={{ alignItems: 'center', top: 0 }}>
+            <Image source={require('../../assets/meatPizza.png')} style={{ height: 120, width: 120 }} />
           </View>
-          <View style={{marginHorizontal: 20}}>
-            <Text style={{fontSize: 18, fontWeight: 'bold'}}>{food.name}</Text>
-            <Text style={{fontSize: 14, color: COLORS.grey, marginTop: 2}}>
-              {food.ingredients}
+          <View style={{ marginHorizontal: 20 }}>
+            <Text style={{ fontSize: 18, fontWeight: 'bold' }}>{food.name}</Text>
+            <Text style={{ fontSize: 14, color: COLORS.grey, marginTop: 2 }}>
+              {food.price}
             </Text>
           </View>
           <View
@@ -96,8 +109,8 @@ const HomeScreen = ({navigation}) => {
               flexDirection: 'row',
               justifyContent: 'space-between',
             }}>
-            <Text style={{fontSize: 18, fontWeight: 'bold'}}>
-              ${food.price}
+            <Text style={{ fontSize: 18, fontWeight: 'bold' }}>
+            ₹ {food.price}
             </Text>
             <View style={style.addToCartBtn}>
               <Icon name="add" size={20} color={COLORS.white} />
@@ -108,7 +121,7 @@ const HomeScreen = ({navigation}) => {
     );
   };
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: COLORS.white}}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
       <View style={style.header}>
         <Image
           source={require('../../assets/icons/apps.png')}
@@ -131,11 +144,11 @@ const HomeScreen = ({navigation}) => {
             flexDirection: 'row',
           }}>
           <Image source={require('../../assets/placeholder.png')}></Image>
-          <Text style={{fontSize: 12, fontWeight: 'bold', color: COLORS.dark}}>
+          <Text style={{ fontSize: 12, fontWeight: 'bold', color: COLORS.dark }}>
             32 Ramkrishna Road,Kolkata
           </Text>
           <Image
-            style={{tintColor: COLORS.primary}}
+            style={{ tintColor: COLORS.primary }}
             source={require('../../assets/down-arrow.png')}></Image>
         </View>
         <View
@@ -148,7 +161,7 @@ const HomeScreen = ({navigation}) => {
             borderRadius: 50,
             padding: 5,
           }}>
-          <Text style={{fontSize: 20, fontWeight: 'bold', color: COLORS.white}}>
+          <Text style={{ fontSize: 20, fontWeight: 'bold', color: COLORS.white }}>
             JS
           </Text>
         </View>
@@ -163,7 +176,7 @@ const HomeScreen = ({navigation}) => {
           <View style={style.inputContainer}>
             <Icon name="search" size={25} />
             <TextInput
-              style={{flex: 1, fontSize: 12}}
+              style={{ flex: 1, fontSize: 12 }}
               placeholder="Search for food"
             />
           </View>
@@ -196,7 +209,7 @@ const HomeScreen = ({navigation}) => {
           <View>
             <ImageBackground
               source={require('../../assets/banner1.jpg')}
-              imageStyle={{borderRadius: 15}}
+              imageStyle={{ borderRadius: 15 }}
               style={{
                 width: '100%',
                 height: 110,
@@ -209,8 +222,8 @@ const HomeScreen = ({navigation}) => {
         )}
         showsVerticalScrollIndicator={false}
         numColumns={2}
-        data={foods}
-        renderItem={({item}) => <Card food={item} />}
+        data={data}
+        renderItem={({ item }) => <Card food={item} />}
       />
     </SafeAreaView>
   );

@@ -13,14 +13,11 @@ import COLORS from '../../consts/colors';
 import { SecondaryButton } from '../components/Button';
 
 
-
-
-
 const DetailsScreen = ({ navigation, route }) => {
   const item = route.params;
   const [count, setCount] = useState(1);
-
- 
+  const[put,setput]=useState(false)
+  console.log('item@@@@@@@@@@@', item);
   return (
     <SafeAreaView style={{ backgroundColor: COLORS.white }}>
       <View style={style.header}>
@@ -34,8 +31,7 @@ const DetailsScreen = ({ navigation, route }) => {
             alignItems: 'center',
             height: 280,
           }}>
-          <Image source={item.image} style={{ height: 220, width: 220 }} />
-        </View>
+
 
         <View style={{ marginBottom: 10, marginLeft: 30 }}>
         </View>
@@ -51,7 +47,9 @@ const DetailsScreen = ({ navigation, route }) => {
               {item.name}
             </Text>
             <View style={style.iconContainer}>
+              <TouchableOpacity>
               <Icon name="favorite-border" color={COLORS.primary} size={25} />
+              </TouchableOpacity>
             </View>
 
 
@@ -84,23 +82,29 @@ const DetailsScreen = ({ navigation, route }) => {
 
             <Text
               style={{ fontWeight: 'bold', color: COLORS.white, fontSize: 18 }}>
+
               {" ̥₹ ̥ 1100"}
+
+              ₹{item.price * count}
+
             </Text>
 
           </View>
 
 
           <Text style={style.detailsText}>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries.
+           {item.desc}
           </Text>
 
           <View style={{ marginTop: 40, marginBottom: 40 }}>
-            <SecondaryButton
-              onPress={makePayment} title="Add To Cart" />
+
+            <SecondaryButton 
+            onPress={()=>{
+              navigation.navigate('order' ,{item:item,count:count})
+            }}
+            
+            title="Add To Cart" />
+
           </View>
 
         </View>
