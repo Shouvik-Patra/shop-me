@@ -20,8 +20,8 @@ const StackNav = () => {
     return (
         <View style = {{flex : 1}}>
             <Stack.Navigator screenOptions={{ headerShown: false }}>
-                <Stack.Screen name="Login" component={Login} />
-                <Stack.Screen name="Registration" component={Registration} />
+                {/* <Stack.Screen name="Login" component={Login} /> */}
+                {/* <Stack.Screen name="Registration" component={Registration} /> */}
                 <Stack.Screen name="BoardScreen" component={OnBoardScreen} />
                 <Stack.Screen name="Home" component={BottomNavigator} />
                 <Stack.Screen name="DetailsScreen" component={DetailsScreen} />
