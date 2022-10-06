@@ -12,7 +12,6 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import COLORS from '../../consts/colors';
 import { SecondaryButton } from '../components/Button';
 
-
 const DetailsScreen = ({ navigation, route }) => {
   const item = route.params;
   const [count, setCount] = useState(1);
@@ -31,7 +30,8 @@ const DetailsScreen = ({ navigation, route }) => {
             alignItems: 'center',
             height: 280,
           }}>
-
+          <Image source={require('../../assets/meatPizza.png')} style={{ height: 220, width: 220 }} />
+        </View>
 
         <View style={{ marginBottom: 10, marginLeft: 30 }}>
         </View>
@@ -47,7 +47,11 @@ const DetailsScreen = ({ navigation, route }) => {
               {item.name}
             </Text>
             <View style={style.iconContainer}>
-              <TouchableOpacity>
+              <TouchableOpacity
+              onPress={()=>{
+                navigation.navigate('Wishlist')
+              }}
+              >
               <Icon name="favorite-border" color={COLORS.primary} size={25} />
               </TouchableOpacity>
             </View>
@@ -82,11 +86,7 @@ const DetailsScreen = ({ navigation, route }) => {
 
             <Text
               style={{ fontWeight: 'bold', color: COLORS.white, fontSize: 18 }}>
-
-              {" ̥₹ ̥ 1100"}
-
               ₹{item.price * count}
-
             </Text>
 
           </View>
@@ -97,14 +97,12 @@ const DetailsScreen = ({ navigation, route }) => {
           </Text>
 
           <View style={{ marginTop: 40, marginBottom: 40 }}>
-
             <SecondaryButton 
             onPress={()=>{
               navigation.navigate('order' ,{item:item,count:count})
             }}
             
             title="Add To Cart" />
-
           </View>
 
         </View>

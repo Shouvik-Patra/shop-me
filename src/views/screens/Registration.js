@@ -16,7 +16,6 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { Ainput } from '../../CommonComponents/common/Ainput';
 import { useDispatch } from 'react-redux';
 import { registration } from '../../store/auth';
-import { Colors } from '../../assets/common/common';
 import DatePickerr from '../../mainscreen/popup/DatePicker';
 import moment from 'moment';
 const Registration = props => {
