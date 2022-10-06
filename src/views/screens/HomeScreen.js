@@ -186,7 +186,7 @@ const HomeScreen = ({ navigation }) => {
         </View>
       )}
 
-      <FlatList
+      {/* <FlatList
         ref={ref}
         onScroll={e => {
           console.log(
@@ -224,7 +224,7 @@ const HomeScreen = ({ navigation }) => {
         numColumns={2}
         data={data}
         renderItem={({ item }) => <Card food={item} />}
-      />
+      /> */}
     </SafeAreaView>
   );
 };

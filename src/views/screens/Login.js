@@ -9,14 +9,13 @@ import {
   Dimensions,
   TouchableOpacity,
 } from 'react-native';
-import { TextInput } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import COLORS from '../../consts/colors';
 import jwt_decode from 'jwt-decode';
 const { height, width } = Dimensions.get('window');
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Ainput } from '../../CommonComponents/common/Ainput';
-import { LoaderOff, LoaderOn } from '../../store/popup';
+import { LoaderOff, LoaderOn, setToastMsg } from '../../store/popup';
 import { useDispatch } from 'react-redux';
 import { login, setUserTokenInfo, userLoginSuccess } from '../../store/auth';
 import { CusButtom } from '../../CommonComponents/common/CusButtom';
@@ -31,7 +30,6 @@ const Login = props => {
   const [Email, setEmail] = useState('');
   const [Password, setPassword] = useState('');
   const [emailLogin, setEmailLogin] = useState(true);
-  const [phno, setPhno] = useState('');
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <KeyboardAwareScrollView>
@@ -156,7 +154,7 @@ const Login = props => {
                         console.log('errr', errr);
                         console.log('====================================');
                         dispatch(
-                          setToastMsg('Please enter correct email or Password .'),
+                         setToastMsg('Please enter correct email or Password .'),
                         );
                         dispatch(LoaderOff());
                       });
@@ -210,6 +208,7 @@ const Login = props => {
                 title="Login"
               />
             </View>
+            <TouchableOpacity onPress={() => props.navigation.navigate('ForgotEmail')}>
             <Text
               style={{
                 alignSelf: 'center',
@@ -217,7 +216,7 @@ const Login = props => {
                 marginTop: 10,
               }}>
               Forgot Password
-            </Text>
+            </Text></TouchableOpacity>
             <TouchableOpacity
               onPress={() => {
                 props.navigation.navigate('Registration')

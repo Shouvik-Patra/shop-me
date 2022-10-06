@@ -39,7 +39,7 @@ const loginSlice = createSlice({
 
   extraReducers: {
 
-// <===================register==================>>>
+// <===================GET All PRODUCT==================>>>
 
 [getallproduct.fulfilled]: (state, action) => {
   //state.productList=action.payload;
