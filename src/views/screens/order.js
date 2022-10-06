@@ -84,6 +84,10 @@ const order = ({navigation}) => {
     </SafeAreaView>
   );
 };
+
+
+
+
 const style = StyleSheet.create({
   header: {
     paddingVertical: 20,

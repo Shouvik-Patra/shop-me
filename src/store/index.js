@@ -7,6 +7,7 @@ import {
 import {persistReducer, persistStore} from 'redux-persist';
 import authReducer from './auth';
 import popupReducer from './popup';
+import productReducer from './product'
 
 
 
@@ -19,6 +20,7 @@ const middlewareState = [
 const rootReducer = combineReducers({
   auth: authReducer,
   popup: popupReducer,
+  product:productReducer,
  
 });
 
