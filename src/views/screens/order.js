@@ -5,8 +5,33 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import COLORS from '../../consts/colors';
 import foods from '../../consts/foods';
 import {PrimaryButton} from '../components/Button';
+import RazorpayCheckout from 'react-native-razorpay';
 
 const order = ({navigation}) => {
+  const makePayment = () => {
+    var options = {
+      description: 'Credits towards consultation',
+      image: 'https://cdn-icons-png.flaticon.com/800/7207/7207388.png',
+      currency: 'INR',
+      key: 'rzp_test_GQvvt2m7UTpdIw', // Your api key
+      amount: '15000',
+      name: 'ATLC Group',
+      prefill: {
+        email: 'test@gmail.com',
+        contact: '9191919191',
+        name: 'Razorpay Software'
+      },
+      theme: { color: '#F37254' }
+    }
+    RazorpayCheckout.open(options).then((data) => {
+      // handle success
+      alert(`Success: ${data.razorpay_payment_id}`);
+    })
+    // .catch((error) => {
+    //   // handle failure
+    //   alert(`Error: ${error.code} | ${error.description}`);
+    // });
+  }
   const [count,setCount]=useState(0);
   const CartCard = ({item}) => {
     return (
@@ -62,25 +87,27 @@ const order = ({navigation}) => {
         data={foods}
         renderItem={({item}) => <CartCard item={item} />}
         ListFooterComponentStyle={{paddingHorizontal: 20, marginTop: 20}}
-        // ListFooterComponent={() => (
-        //   <View>
-        //     <View
-        //       style={{
-        //         flexDirection: 'row',
-        //         justifyContent: 'space-between',
-        //         marginVertical: 15,
-        //       }}>
-        //       <Text style={{fontSize: 18, fontWeight: 'bold'}}>
-        //         Total Price
-        //       </Text>
-        //       <Text style={{fontSize: 18, fontWeight: 'bold'}}>$50</Text>
-        //     </View>
-        //     <View style={{marginHorizontal: 30}}>
-        //       <PrimaryButton title="CHECKOUT" />
-        //     </View>
-        //   </View>
-        // )}
+        ListFooterComponent={() => (
+          <View>
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                marginVertical: 15,
+              }}>
+              <Text style={{fontSize: 18, fontWeight: 'bold'}}>
+                Total Price
+              </Text>
+              <Text style={{fontSize: 18, fontWeight: 'bold'}}>$50</Text>
+            </View>
+            <View style={{marginHorizontal: 30}}>
+              <PrimaryButton 
+              onPress={makePayment} title="CHECKOUT" />
+            </View>
+          </View>
+        )}
       />
+      
     </SafeAreaView>
   );
 };
