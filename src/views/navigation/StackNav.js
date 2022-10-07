@@ -22,16 +22,16 @@ const StackNav = () => {
     return (
         <View style = {{flex : 1}}>
             <Stack.Navigator screenOptions={{ headerShown: false }}>
-                <Stack.Screen name="Login" component={Login} /> 
-                <Stack.Screen name="Registration" component={Registration} /> 
-                {/* <Stack.Screen name="BoardScreen" component={OnBoardScreen} />
+                {/* <Stack.Screen name="Login" component={Login} /> 
+                <Stack.Screen name="Registration" component={Registration} />  */}
+                <Stack.Screen name="BoardScreen" component={OnBoardScreen} />
                 <Stack.Screen name="Home" component={BottomNavigator} />
                 <Stack.Screen name="DetailsScreen" component={DetailsScreen} />
                 <Stack.Screen name="HomeScreen" component={HomeScreen} />
-                <Stack.Screen name="order" component={order}/> */}
-                <Stack.Screen name="ForgotEmail" component={ForgotEmail}/>
+                <Stack.Screen name="order" component={order}/>
+                {/* <Stack.Screen name="ForgotEmail" component={ForgotEmail}/>
                 <Stack.Screen name="EnterOtp" component={EnterOtp}/>
-                <Stack.Screen name="ResetPassword" component={ResetPassword}/>
+                <Stack.Screen name="ResetPassword" component={ResetPassword}/> */}
             </Stack.Navigator>
         </View>
     )
