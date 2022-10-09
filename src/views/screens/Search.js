@@ -26,19 +26,24 @@ const { width } = Dimensions.get('screen');
 const cardWidth = width / 2 - 20;
 
 
-const Search = () => {
+const Search = (props) => {
   const bottomSheet = useRef();
   const [radio, setradioValue] = useState(' ');
   return (
+    
     <ScrollView>
+      <View style={styles.header}>
+                <Icon name="arrow-back-ios" size={28} onPress={props.navigation.goBack} />
+                <Rtext style={{ fontSize: 20, fontWeight: 'bold' }}>Filter</Rtext>
+            </View>
       <View
         style={{
-          marginTop: 40,
+          marginTop: 30,
           flexDirection: 'row',
           paddingHorizontal: 20,
         }}>
         <View style={styles.inputContainer}>
-          <Icon name="search" size={28} />
+          <Icon name="search" size={25} />
           <TextInput
             style={{ flex: 1, fontSize: 18 }}
             placeholder="Search for food"
@@ -100,13 +105,14 @@ const Search = () => {
               }}
               source={require('../../assets/icons/sorting.png')
               }
-            />
+            /></TouchableOpacity>
             <Rtext>Sort</Rtext>
-          </TouchableOpacity>
+          
           
 
         </View>
         <View style={styles.button}>
+        <TouchableOpacity onPress={() => props.navigation.navigate('Filter')}>
           <Image
             style={{
               height: 20,
@@ -116,7 +122,7 @@ const Search = () => {
             }}
             source={require('../../assets/icons/filter.png')
             }
-          />
+          /></TouchableOpacity>
           <Rtext>Filter</Rtext>
         </View>
 
@@ -169,7 +175,7 @@ export default Search;
 
 const styles = StyleSheet.create({
   header: {
-    marginTop: 20,
+    marginTop: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: 20,
@@ -181,7 +187,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: COLORS.light,
     alignItems: 'center',
-    paddingHorizontal: 20,
+    paddingHorizontal: 15,
   },
   button: {
     width: '50%', height: 40, borderBottomColor: "#808080", borderTopColor: "#808080", borderBottomWidth: 1, borderTopWidth: 1, flexDirection: "row", alignItems: "center", justifyContent: "center"

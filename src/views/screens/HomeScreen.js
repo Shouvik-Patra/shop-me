@@ -1,5 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, } from 'react';
 import {
+  Animated,
   Dimensions,
   Image,
   ImageBackground,
@@ -31,16 +32,22 @@ const HomeScreen = ({ navigation }) => {
   const [showSearch, setShowSearch] = useState(true);
   const [selectedCategoryIndex, setSelectedCategoryIndex] = React.useState(0);
   const ref = useRef();
+
+  const scrollY = new Animated.Value(0);
+  const diffClamp = Animated.diffClamp(scrollY, 0, 45);
+  const translateY = diffClamp.interpolate({
+    inputRange: [0, 45],
+    outputRange: [0, -45],
+  })
+
+
   const [scrolled, setScrolled] = useState(true);
   const dispatch = useDispatch()
   const data = useSelector(state => state.product.getallproduct);
-  console.log('********data************',data);
+  console.log('********data************', data);
   useEffect(() => {
     dispatch(getallproduct())
   }, [])
-
-
-
 
   const ListCategories = () => {
     return (
@@ -86,7 +93,7 @@ const HomeScreen = ({ navigation }) => {
     );
   };
   const Card = ({ food }) => {
-    console.log('food&&&&&&&&&&&&&',food);
+    console.log('food&&&&&&&&&&&&&', food);
     return (
       <TouchableHighlight
         underlayColor={COLORS.white}
@@ -96,22 +103,22 @@ const HomeScreen = ({ navigation }) => {
           <View style={{ alignItems: 'center', top: 0 }}>
             <Image source={require('../../assets/meatPizza.png')} style={{ height: 120, width: 120 }} />
           </View>
-          <View style={{ marginHorizontal: 20 }}>
-            <Text style={{ fontSize: 18, fontWeight: 'bold' }}>{food.name}</Text>
-            <Text style={{ fontSize: 14, color: COLORS.grey, marginTop: 2 }}>
+          <View style={{ marginHorizontal: 10, alignSelf: "center" }}>
+            <Text style={{ marginTop: 10, fontSize: 18, fontWeight: 'bold' }}>{food.name}</Text>
+            {/* <Text style={{ fontSize: 14, color: COLORS.grey, marginTop: 2 }}>
               {food.price}
-            </Text>
+            </Text> */}
           </View>
           <View
             style={{
               marginTop: 10,
-              marginHorizontal: 20,
+              marginHorizontal: 10,
               flexDirection: 'row',
               justifyContent: 'space-between',
             }}>
-            <Text style={{ fontSize: 18, fontWeight: 'bold' }}>
-            ₹ {food.price}
-            </Text>
+            <Rtext style={{ fontSize: 18, fontWeight: 'bold' }}>
+              ₹ {food.price}
+            </Rtext>
             <View style={style.addToCartBtn}>
               <Icon name="add" size={20} color={COLORS.white} />
             </View>
@@ -126,7 +133,6 @@ const HomeScreen = ({ navigation }) => {
         <Image
           source={require('../../assets/icons/apps.png')}
           style={{
-            // backgroundColor: COLORS.primary,
             alignItems: 'center',
             justifyContent: 'center',
             height: 35,
@@ -166,56 +172,77 @@ const HomeScreen = ({ navigation }) => {
           </Text>
         </View>
       </View>
-      {showSearch && (
+      <Animated.View
+        style={{
+          transform: [{ translateY: translateY }],
+          elevation: 4,
+          zIndex: 100,
+        }}>
         <View
           style={{
-            marginTop: 10,
+            //marginTop: 10,
+            //position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            height: 20,
+            bottom: 5,
             flexDirection: 'row',
             paddingHorizontal: 10,
           }}>
           <View style={style.inputContainer}>
-            <Icon name="search" size={25} />
+            <Icon name="search" size={20} />
             <TextInput
               style={{ flex: 1, fontSize: 12 }}
               placeholder="Search for food"
             />
+            <View style={{ flexDirection: "row-reverse", }}>
+              <TouchableOpacity>
+                <Icon name="camera-alt" size={20} />
+              </TouchableOpacity>
+              <TouchableOpacity>
+                <Icon name="mic" size={20} />
+              </TouchableOpacity>
+            </View>
           </View>
-          <View style={style.sortBtn}>
+          {/* <View style={style.sortBtn}>
             <Icon name="tune" size={28} color={COLORS.white} />
-          </View>
+          </View> */}
         </View>
-      )}
+      </Animated.View>
+      {/* {showSearch && (      
+      )} */}
 
-      {/* <FlatList
+      <FlatList
         ref={ref}
-        onScroll={e => {
-          console.log(
-            'event.nativeEvent.contentOffset.y',
-            e.nativeEvent.contentOffset.y,
-          );
+        // onScroll={e => {
+        //   console.log(
+        //     'event.nativeEvent.contentOffset.y',
+        //     e.nativeEvent.contentOffset.y,
+        //   );
 
-          setScollVal(e.nativeEvent.contentOffset.y);
+        //   setScollVal(e.nativeEvent.contentOffset.y);
 
-          if (e.nativeEvent.contentOffset.y > scollVal) {
-            setShowSearch(false);
-          } else {
-            setShowSearch(true);
-          }
+        //   if (e.nativeEvent.contentOffset.y > scollVal) {
+        //     setShowSearch(false);
+        //   } else {
+        //     setShowSearch(true);
+        //   }
+        // }}
+        onScroll={(event) => {
+          scrollY.setValue(event.nativeEvent.contentOffset.y)
         }}
-        // onScroll = (event) => {
-        //   const scrollOffset = event.nativeEvent.contentOffset.y
-        // }
         ListHeaderComponent={() => (
           <View>
             <ImageBackground
               source={require('../../assets/banner1.jpg')}
-              imageStyle={{ borderRadius: 15 }}
+              imageStyle={{ borderRadius: 5 }}
               style={{
                 width: '100%',
                 height: 110,
-                marginTop: 10,
-                paddingHorizontal: 15,
-                marginLeft: 15,
+                marginTop: 30,
+                paddingHorizontal: 5,
+                marginLeft: 5,
               }}></ImageBackground>
             <ListCategories />
           </View>
@@ -224,26 +251,28 @@ const HomeScreen = ({ navigation }) => {
         numColumns={2}
         data={data}
         renderItem={({ item }) => <Card food={item} />}
-      /> */}
+      />
     </SafeAreaView>
   );
 };
 
 const style = StyleSheet.create({
   header: {
-    marginTop: 20,
+    marginTop: 5,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingHorizontal: 20,
+    paddingHorizontal: 10,
   },
   inputContainer: {
     flex: 1,
-    height: 50,
+    height: 40,
     borderRadius: 10,
+    marginTop: 5,
+    marginBottom: 10,
     flexDirection: 'row',
     backgroundColor: COLORS.light,
     alignItems: 'center',
-    paddingHorizontal: 20,
+    paddingHorizontal: 10,
   },
   sortBtn: {
     width: 50,
@@ -278,18 +307,19 @@ const style = StyleSheet.create({
     alignItems: 'center',
   },
   card: {
-    height: 220,
+    height: 230,
     width: cardWidth,
     marginHorizontal: 10,
-    marginBottom: 20,
-    marginTop: 50,
+    marginBottom: 10,
+    marginTop: 10,
     borderRadius: 15,
-    elevation: 13,
-    backgroundColor: COLORS.white,
+    elevation: 4,
+    padding: 15
+    //backgroundColor: COLORS.white,
   },
   addToCartBtn: {
-    height: 30,
-    width: 30,
+    height: 25,
+    width: 25,
     borderRadius: 20,
     backgroundColor: COLORS.primary,
     justifyContent: 'center',

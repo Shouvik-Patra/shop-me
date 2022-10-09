@@ -26,7 +26,6 @@ const CusButtom = ({
         justifyContent: 'center',
         paddingVertical: 12,
         borderRadius: 30,
-        marginTop: 15,
         borderColor: COLORS.secondary,
         borderWidth: 1,
         ...BTNstyle,
